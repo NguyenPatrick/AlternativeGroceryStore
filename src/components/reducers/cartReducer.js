@@ -2,7 +2,6 @@ import Salmon from "../../images/salmon.svg";
 import Steak from "../../images/steak.svg";
 import Eggs from "../../images/eggs.jpg";
 import Spinach from "../../images/spinach.jpg";
-import Yogurt from "../../images/yogurt.jpg";
 import Milk from "../../images/milk.svg";
 import Pasta from "../../images/pasta.svg";
 import Avocado from "../../images/avocado.svg";
@@ -73,16 +72,7 @@ const showAllState = {
       category: "fruit/vegetable",
       img: Watermelon,
     },
-    {
-      id: 6,
-      title: "Yogurt",
-      price: 10,
-      vegetarian: true,
-      glutenFree: true,
-      organic: false,
-      category: "dairy",
-      img: Yogurt,
-    },
+
     {
       id: 3,
       title: "Eggs",
