@@ -8,6 +8,11 @@
   align-self: center;
 }
 
+.button-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;

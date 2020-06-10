@@ -52,7 +52,7 @@ const showAllState = {
       price: 5,
       vegetarian: true,
       glutenFree: false,
-      organic: true,
+      organic: false,
       category: "grains",
       img: Muffin,
     },
@@ -122,7 +122,7 @@ const showAllState = {
       price: 15,
       vegetarian: true,
       glutenFree: false,
-      organic: true,
+      organic: false,
       category: "grains",
       img: Bread,
     },
@@ -166,6 +166,7 @@ const cartReducer = (state = showAllState, action) => {
     console.log("1 - Vegetarian");
     return {
       ...showAllState,
+      items: state.items.filter((item) => item.vegetarian === true),
     };
   }
 
@@ -173,15 +174,19 @@ const cartReducer = (state = showAllState, action) => {
     console.log("1 - Gluten Free");
     return {
       ...showAllState,
+      items: state.items.filter((item) => item.glutenFree === true),
     };
   }
-  if (action.type === SHOW_ALL) {
+
+  if (action.type === ORGANIC) {
     console.log("1 - Show All");
     return {
       ...showAllState,
+      items: state.items.filter((item) => item.organic === true),
     };
   }
-  if (action.type === ORGANIC) {
+
+  if (action.type === SHOW_ALL) {
     console.log("1 - Show All");
     return {
       ...showAllState,

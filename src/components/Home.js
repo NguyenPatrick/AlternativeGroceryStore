@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import "./Home.css";
 
@@ -12,38 +11,42 @@ import {
   organicFilter,
 } from "./actions/cartActions";
 
+var glutenFreeCheck = false;
+var vegatarianCheck = false;
+var organicCheck = false;
+
 class Home extends Component {
-  handleClick = (id) => {
-    this.props.addToCart(id);
-  };
-
-  handleChange = (e) => {
-    console.log(e.value);
-
-    if (e.value == "Vegetarian") {
-      this.props.vegatarianFilter();
-    } else if (e.value == "Gluten-Free") {
-      this.props.glutenFreeFilter();
-    } else if (e.value == "Organic") {
-      this.props.organicFilter();
-    } else {
-      this.props.showAllFilter();
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.props.showAllFilter();
+    glutenFreeCheck = false;
+    vegatarianCheck = false;
+    organicCheck = false;
+  }
 
   nextPage = () => {
-    console.log("Next Page");
+    this.props.showAllFilter();
+
+    if (glutenFreeCheck == true) {
+      this.props.glutenFreeFilter();
+    }
+    if (vegatarianCheck == true) {
+      this.props.vegatarianFilter();
+    }
+    if (organicCheck == true) {
+      this.props.organicFilter();
+    }
     this.props.history.push("/main/");
   };
 
-  handleOrganic = (e) => {
-    console.log("Organic Filter");
+  handleGlutenFree = (e) => {
+    glutenFreeCheck = !glutenFreeCheck;
+  };
+  handleVegetarian = (e) => {
+    vegatarianCheck = !vegatarianCheck;
   };
   handleOrganic = (e) => {
-    console.log("Organic Filter");
-  };
-  handleOrganic = (e) => {
-    console.log("Organic Filter");
+    organicCheck = !organicCheck;
   };
 
   render() {
@@ -57,15 +60,15 @@ class Home extends Component {
         <h5>Do you have any dietary preferences?</h5>
 
         <div className="checkbox-list">
-          <label class="checkbox-item">
-            <input type="checkbox" onChange={this.handleChange} />
+          <label className="checkbox-item">
+            <input type="checkbox" onChange={this.handleVegetarian} />
             <span>Vegetarian</span>
           </label>
-          <label class="checkbox-item">
-            <input type="checkbox" onChange={this.handleChange} />
+          <label className="checkbox-item">
+            <input type="checkbox" onChange={this.handleGlutenFree} />
             <span>Gluten-Free</span>
           </label>
-          <label class="checkbox-item">
+          <label className="checkbox-item">
             <input type="checkbox" onChange={this.handleOrganic} />
             <span>Organic</span>
           </label>

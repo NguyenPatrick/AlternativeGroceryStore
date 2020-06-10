@@ -8,6 +8,11 @@ import {
   GLUTEN_FREE,
   SHOW_ALL,
   ORGANIC,
+  SHOW_CURRENT,
+  FRUITVEGETABLES,
+  MEAT,
+  DAIRY,
+  GRAINS,
 } from "./action-types/cart-actions";
 
 //add cart action
@@ -59,5 +64,34 @@ export const showAllFilter = () => {
 export const organicFilter = () => {
   return {
     type: ORGANIC,
+  };
+};
+
+export const showCurrentFilter = () => {
+  return {
+    type: SHOW_CURRENT,
+  };
+};
+
+export const fruitVegetablesFilter = () => {
+  return {
+    type: FRUITVEGETABLES,
+  };
+};
+export const meatFilter = () => {
+  return {
+    type: MEAT,
+  };
+};
+
+export const dairyFilter = () => {
+  return {
+    type: DAIRY,
+  };
+};
+
+export const grainsFilter = () => {
+  return {
+    type: GRAINS,
   };
 };
