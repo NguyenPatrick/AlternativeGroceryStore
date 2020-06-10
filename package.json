@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@kunukn/react-collapse": "^2.2.9",
     "@material-ui/core": "^4.10.1",
     "@material/checkbox": "^6.0.0",
+    "muicss": "^0.10.2",
     "rc-checkbox": "^2.2.0",
     "react": "^16.6.3",
     "react-checklist": "^1.0.9",
+    "react-collapsible": "^2.8.0",
     "react-dom": "^16.6.3",
     "react-dropdown": "^1.7.0",
     "react-multi-select-component": "^2.0.8",
@@ -16,6 +19,7 @@
     "react-scripts": "2.1.1",
     "react-select": "^3.1.0",
     "react-simple-checkbox": "^1.3.0",
+    "reactstrap": "^8.4.1",
     "redux": "^4.0.1",
     "semantic-ui-react": "^0.88.2"
   },

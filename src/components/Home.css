@@ -2,6 +2,17 @@
   background-color: #a8d3fe;
 }
 
+.next-button {
+  background-color: #a8d3fe;
+  width: 20%;
+  align-self: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 h4 {
   display: flex;
   justify-content: center;
@@ -20,6 +31,27 @@ h2 {
   font-size: 50px;
 }
 
+.landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .land-desc {
   font-size: 25px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox-list {
+  display: flex;
+  justify-content: center;
+}
+
+.checkbox-item {
+  color: black;
+  margin: 25px;
 }

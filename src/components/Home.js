@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Select from "react-select";
+import Collapsible from "react-collapsible";
+
+import Checkbox from "muicss/lib/react/checkbox";
+
 import "./Home.css";
 
 import {
@@ -33,10 +37,6 @@ const data = [
 const options = ["Vegetarian", "Gluten-Free", "Organic"];
 
 class Home extends Component {
-  state = { checked: false };
-  handleCheckboxChange = (event) =>
-    this.setState({ checked: event.target.checked });
-
   handleClick = (id) => {
     this.props.addToCart(id);
   };
@@ -55,6 +55,16 @@ class Home extends Component {
     }
   };
 
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
+  };
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
+  };
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
+  };
+
   checkList = (e) => {
     console.log("yooo");
     console.log(e.value);
@@ -64,9 +74,8 @@ class Home extends Component {
     let items = this.props.item;
 
     let dairyList = this.props.items.map((item) => {
-      return item.title == "Spinach" ? (
+      return item.category == "dairy" ? (
         <div className="card" key={item.id}>
-          {item.title === "Spinach"}
           <div className="card-image">
             <img src={item.img} alt={item.title} />
           </div>
@@ -90,8 +99,8 @@ class Home extends Component {
       ) : null;
     });
 
-    let grainList = this.props.items.map((item) => {
-      return (
+    let grainsList = this.props.items.map((item) => {
+      return item.category == "grains" ? (
         <div className="card" key={item.id}>
           <div className="card-image">
             <img src={item.img} alt={item.title} />
@@ -113,8 +122,61 @@ class Home extends Component {
             </p>
           </div>
         </div>
-      );
+      ) : null;
     });
+
+    let fruitVegatableList = this.props.items.map((item) => {
+      return item.category == "vegetable" || item.category == "fruit" ? (
+        <div className="card" key={item.id}>
+          <div className="card-image">
+            <img src={item.img} alt={item.title} />
+          </div>
+          <span className="card-title">{item.title}</span>
+          <span
+            to="/"
+            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+            onClick={() => {
+              this.handleClick(item.id);
+            }}
+          >
+            <i className="material-icons">add</i>
+          </span>
+          <div className="card-content">
+            <p>{item.desc}</p>
+            <p className="card-price">
+              <b>Price: {item.price}$</b>
+            </p>
+          </div>
+        </div>
+      ) : null;
+    });
+
+    let meatList = this.props.items.map((item) => {
+      return item.category == "meat" ? (
+        <div className="card" key={item.id}>
+          <div className="card-image">
+            <img src={item.img} alt={item.title} />
+          </div>
+          <span className="card-title">{item.title}</span>
+          <span
+            to="/"
+            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+            onClick={() => {
+              this.handleClick(item.id);
+            }}
+          >
+            <i className="material-icons">add</i>
+          </span>
+          <div className="card-content">
+            <p>{item.desc}</p>
+            <p className="card-price">
+              <b>Price: {item.price}$</b>
+            </p>
+          </div>
+        </div>
+      ) : null;
+    });
+
     return (
       <div className="container landing">
         <h2 className="landing-title">Welcome to Patrick's Grocery Store!</h2>
@@ -124,16 +186,61 @@ class Home extends Component {
         <br />
         <h5>Do you have any dietary preferences?</h5>
 
+        <div className="checkbox-list">
+          <label class="checkbox-item">
+            <input type="checkbox" onChange={this.handleChange} />
+            <span>Vegetarian</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" onChange={this.handleChange} />
+            <span>Gluten-Free</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" onChange={this.handleChange} />
+            <span>Organic</span>
+          </label>
+        </div>
+
+        <button
+          className=" btn-large next-button"
+          name="action"
+          onChange={this.handleChange}
+        >
+          Next
+        </button>
+
         <Select
           placeholder="Select Option"
           options={data} // set list of the data
           onChange={this.handleChange} // assign onChange function
         />
 
-        <h2 className="landing-title">Dairy Products</h2>
+        {/* 
+        <form>
+          <Checkbox
+            className="check"
+            name="inputA1"
+            label="Option one"
+            defaultChecked={true}
+            onChange={this.handleChange}
+          />
+          <Checkbox name="inputA2" label="Option two" />
+          <Checkbox
+            name="inputA3"
+            label="Option three is disabled"
+            disabled={true}
+          />
+        </form> */}
+
+        <h2 className="landing-title"></h2>
         <div className="box">{dairyList}</div>
-        <h2 className="landing-title">Dairy Products</h2>
-        <div className="box">{grainList}</div>
+
+        <h2 className="landing-title">Grains</h2>
+        <div className="box">{grainsList}</div>
+        <h2 className="landing-title">Fruits/Vegetables</h2>
+        <div className="box">{fruitVegatableList}</div>
+        <h2 className="landing-title">Meat</h2>
+        <div className="box">{meatList}</div>
       </div>
     );
   }

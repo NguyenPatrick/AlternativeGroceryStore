@@ -2,7 +2,6 @@ import Salmon from "../../images/salmon.svg";
 import Steak from "../../images/steak.svg";
 import Eggs from "../../images/eggs.jpg";
 import Spinach from "../../images/spinach.jpg";
-import Brocolli from "../../images/brocolli.jpg";
 import Yogurt from "../../images/yogurt.jpg";
 import Milk from "../../images/milk.svg";
 import Pasta from "../../images/pasta.svg";
@@ -34,18 +33,8 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
-      category: "vegatable",
+      category: "fruit",
       img: Spinach,
-    },
-    {
-      id: 5,
-      title: "Brocolli",
-      price: 5,
-      vegetarian: true,
-      glutenFree: true,
-      organic: true,
-      category: "vegatable",
-      img: Brocolli,
     },
     {
       id: 11,
@@ -54,6 +43,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
+      category: "fruit",
       img: Banana,
     },
     {
@@ -63,6 +53,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: false,
       organic: true,
+      category: "grains",
       img: Muffin,
     },
     {
@@ -72,6 +63,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
+      category: "fruit",
       img: Watermelon,
     },
     {
@@ -121,6 +113,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
+      category: "dairy",
       img: Milk,
     },
     {
@@ -130,6 +123,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: false,
       organic: true,
+      category: "grains",
       img: Bread,
     },
     {
@@ -139,6 +133,7 @@ const showAllState = {
       vegetarian: false,
       glutenFree: true,
       organic: true,
+      category: "meat",
       img: Chicken,
     },
     {
@@ -148,6 +143,7 @@ const showAllState = {
       vegetarian: false,
       glutenFree: true,
       organic: true,
+      category: "meat",
       img: Salmon,
     },
     {
@@ -157,6 +153,7 @@ const showAllState = {
       vegetarian: false,
       glutenFree: true,
       organic: true,
+      category: "meat",
       img: Steak,
     },
   ],

@@ -1,25 +1,18 @@
-class Checkbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isChecked: true,
-    };
-  }
-  toggleChange = () => {
-    this.setState({
-      isChecked: !this.state.isChecked,
-    });
-  };
-  render() {
-    return (
-      <label>
-        <input
-          type="checkbox"
-          checked={this.state.isChecked}
-          onChange={this.toggleChange}
-        />
-        Check Me!
-      </label>
-    );
-  }
-}
+import React from "react";
+
+const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
+  <div className="form-check">
+    <label>
+      <input
+        type="checkbox"
+        name={label}
+        checked={isSelected}
+        onChange={onCheckboxChange}
+        className="form-check-input"
+      />
+      {label}
+    </label>
+  </div>
+);
+
+export default Checkbox;
