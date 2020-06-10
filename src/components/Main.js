@@ -13,6 +13,11 @@ import {
   glutenFreeFilter,
   showAllFilter,
   organicFilter,
+  showCurrentFilter,
+  fruitVegetablesFilter,
+  meatFilter,
+  grainsFilter,
+  dairyFilter,
 } from "./actions/cartActions";
 
 const data = [
@@ -38,9 +43,14 @@ const data = [
   },
 ];
 
-const foodList = [];
+var filter;
+var showAllList;
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   previousPage = () => {
     this.props.history.push("/");
   };
@@ -56,19 +66,138 @@ class Main extends Component {
   handleChange = (e) => {
     console.log(e.value);
 
-    if (e.value == "Show All") {
-      this.props.vegatarianFilter();
-    } else if (e.value == "Organic") {
-      this.props.organicFilter();
-    } else if (e.value == "Organic") {
-      this.props.organicFilter();
+    if (e.value == "Grains") {
+      this.props.grainsFilter();
+    } else if (e.value == "Fruits/Vegetables") {
+      this.props.fruitVegetablesFilter();
+    } else if (e.value == "Meat") {
+      this.props.meatFilter();
+    } else if (e.value == "Dairy") {
+      this.props.dairyFilter();
     } else {
-      this.props.showAllFilter();
+      this.props.showCurrentFilter();
+    }
+  };
+
+  filterItems = (e) => {
+    filter = e.value;
+
+    if (filter == "Dairy") {
+      console.log("Filter Dairy");
+
+      showAllList = this.props.items.map((item) => {
+        return item.category == "dairy" ? (
+          <div className="card" key={item.id}>
+            <div className="card-image">
+              <img src={item.img} alt={item.title} />
+            </div>
+            <span className="card-title">{item.title}</span>
+            <span
+              to="/"
+              className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+              onClick={() => {
+                this.handleClick(item.id);
+              }}
+            >
+              <i className="material-icons">add</i>
+            </span>
+            <div className="card-content">
+              <p>{item.desc}</p>
+              <p className="card-price">
+                <b>Price: {item.price}$</b>
+              </p>
+            </div>
+          </div>
+        ) : null;
+      });
+    } else if (filter == "Grains") {
+      console.log("Filter Grains");
+      showAllList = this.props.items.map((item) => {
+        return item.category == "grains" ? (
+          <div className="card" key={item.id}>
+            <div className="card-image">
+              <img src={item.img} alt={item.title} />
+            </div>
+            <span className="card-title">{item.title}</span>
+            <span
+              to="/"
+              className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+              onClick={() => {
+                this.handleClick(item.id);
+              }}
+            >
+              <i className="material-icons">add</i>
+            </span>
+            <div className="card-content">
+              <p>{item.desc}</p>
+              <p className="card-price">
+                <b>Price: {item.price}$</b>
+              </p>
+            </div>
+          </div>
+        ) : null;
+      });
+    } else if (filter == "Fruits/Vegetables") {
+      console.log("Filter Fruits/Vegetables");
+      showAllList = this.props.items.map((item) => {
+        return item.category == "vegetable" || item.category == "fruit" ? (
+          <div className="card" key={item.id}>
+            <div className="card-image">
+              <img src={item.img} alt={item.title} />
+            </div>
+            <span className="card-title">{item.title}</span>
+            <span
+              to="/"
+              className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+              onClick={() => {
+                this.handleClick(item.id);
+              }}
+            >
+              <i className="material-icons">add</i>
+            </span>
+            <div className="card-content">
+              <p>{item.desc}</p>
+              <p className="card-price">
+                <b>Price: {item.price}$</b>
+              </p>
+            </div>
+          </div>
+        ) : null;
+      });
+    } else if (filter == "Meat") {
+      console.log("Filter Meat");
+      showAllList = this.props.items.map((item) => {
+        return item.category == "meat" ? (
+          <div className="card" key={item.id}>
+            <div className="card-image">
+              <img src={item.img} alt={item.title} />
+            </div>
+            <span className="card-title">{item.title}</span>
+            <span
+              to="/"
+              className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
+              onClick={() => {
+                this.handleClick(item.id);
+              }}
+            >
+              <i className="material-icons">add</i>
+            </span>
+            <div className="card-content">
+              <p>{item.desc}</p>
+              <p className="card-price">
+                <b>Price: {item.price}$</b>
+              </p>
+            </div>
+          </div>
+        ) : null;
+      });
+    } else {
+      console.log("Filter All");
     }
   };
 
   render() {
-    let items = this.props.item;
+    let render = "Meat";
 
     let showAllList = this.props.items.map((item) => {
       return (
@@ -95,110 +224,6 @@ class Main extends Component {
         </div>
       );
     });
-
-    // let dairyList = this.props.items.map((item) => {
-    //   return item.category == "dairy" ? (
-    //     <div className="card" key={item.id}>
-    //       <div className="card-image">
-    //         <img src={item.img} alt={item.title} />
-    //       </div>
-    //       <span className="card-title">{item.title}</span>
-    //       <span
-    //         to="/"
-    //         className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-    //         onClick={() => {
-    //           this.handleClick(item.id);
-    //         }}
-    //       >
-    //         <i className="material-icons">add</i>
-    //       </span>
-    //       <div className="card-content">
-    //         <p>{item.desc}</p>
-    //         <p className="card-price">
-    //           <b>Price: {item.price}$</b>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   ) : null;
-    // });
-
-    // let grainsList = this.props.items.map((item) => {
-    //   return item.category == "grains" ? (
-    //     <div className="card" key={item.id}>
-    //       <div className="card-image">
-    //         <img src={item.img} alt={item.title} />
-    //       </div>
-    //       <span className="card-title">{item.title}</span>
-    //       <span
-    //         to="/"
-    //         className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-    //         onClick={() => {
-    //           this.handleClick(item.id);
-    //         }}
-    //       >
-    //         <i className="material-icons">add</i>
-    //       </span>
-    //       <div className="card-content">
-    //         <p>{item.desc}</p>
-    //         <p className="card-price">
-    //           <b>Price: {item.price}$</b>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   ) : null;
-    // });
-
-    // let fruitVegatableList = this.props.items.map((item) => {
-    //   return item.category == "vegetable" || item.category == "fruit" ? (
-    //     <div className="card" key={item.id}>
-    //       <div className="card-image">
-    //         <img src={item.img} alt={item.title} />
-    //       </div>
-    //       <span className="card-title">{item.title}</span>
-    //       <span
-    //         to="/"
-    //         className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-    //         onClick={() => {
-    //           this.handleClick(item.id);
-    //         }}
-    //       >
-    //         <i className="material-icons">add</i>
-    //       </span>
-    //       <div className="card-content">
-    //         <p>{item.desc}</p>
-    //         <p className="card-price">
-    //           <b>Price: {item.price}$</b>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   ) : null;
-    // });
-
-    // let meatList = this.props.items.map((item) => {
-    //   return item.category == "meat" ? (
-    //     <div className="card" key={item.id}>
-    //       <div className="card-image">
-    //         <img src={item.img} alt={item.title} />
-    //       </div>
-    //       <span className="card-title">{item.title}</span>
-    //       <span
-    //         to="/"
-    //         className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-    //         onClick={() => {
-    //           this.handleClick(item.id);
-    //         }}
-    //       >
-    //         <i className="material-icons">add</i>
-    //       </span>
-    //       <div className="card-content">
-    //         <p>{item.desc}</p>
-    //         <p className="card-price">
-    //           <b>Price: {item.price}$</b>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   ) : null;
-    // });
 
     return (
       <div className="container landing">
@@ -231,16 +256,6 @@ class Main extends Component {
         </div>
 
         <div className="box">{showAllList}</div>
-
-        {/* <h2 className="landing-title">Dairy</h2>
-        <div className="box">{dairyList}</div>
-
-        <h2 className="landing-title">Grains</h2>
-        <div className="box">{grainsList}</div>
-        <h2 className="landing-title">Fruits/Vegetables</h2>
-        <div className="box">{fruitVegatableList}</div>
-        <h2 className="landing-title">Meat</h2>
-        <div className="box">{meatList}</div> */}
       </div>
     );
   }
@@ -266,6 +281,21 @@ const mapDispatchToProps = (dispatch) => {
     },
     organicFilter: () => {
       dispatch(organicFilter());
+    },
+    showCurrentFilter: () => {
+      dispatch(showCurrentFilter());
+    },
+    fruitVegetablesFilter: () => {
+      dispatch(fruitVegetablesFilter());
+    },
+    meatFilter: () => {
+      dispatch(meatFilter());
+    },
+    grainsFilter: () => {
+      dispatch(grainsFilter());
+    },
+    dairyFilter: () => {
+      dispatch(dairyFilter());
     },
   };
 };

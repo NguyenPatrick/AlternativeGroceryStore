@@ -22,8 +22,15 @@ import {
   GLUTEN_FREE,
   SHOW_ALL,
   ORGANIC,
+  SHOW_CURRENT,
+  MEAT,
+  DAIRY,
+  FRUITVEGETABLES,
+  GRAINS,
 } from "../actions/action-types/cart-actions";
+import { statements } from "@babel/template";
 
+const currentStates = [];
 const showAllState = {
   items: [
     {
@@ -33,7 +40,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
-      category: "fruit",
+      category: "fruit/vegetable",
       img: Spinach,
     },
     {
@@ -43,7 +50,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
-      category: "fruit",
+      category: "fruit/vegetable",
       img: Banana,
     },
     {
@@ -63,7 +70,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
-      category: "fruit",
+      category: "fruit/vegetable",
       img: Watermelon,
     },
     {
@@ -103,7 +110,7 @@ const showAllState = {
       vegetarian: true,
       glutenFree: true,
       organic: true,
-      category: "vegetable",
+      category: "fruit/vegetable",
       img: Avocado,
     },
     {
@@ -159,30 +166,35 @@ const showAllState = {
   ],
   addedItems: [],
   total: 0,
+  previousState: [],
 };
 
 const cartReducer = (state = showAllState, action) => {
   if (action.type === VEGETARIAN) {
     console.log("1 - Vegetarian");
     return {
-      ...showAllState,
+      ...state,
       items: state.items.filter((item) => item.vegetarian === true),
+      previousState: state,
     };
   }
 
   if (action.type === GLUTEN_FREE) {
     console.log("1 - Gluten Free");
     return {
-      ...showAllState,
+      ...state,
       items: state.items.filter((item) => item.glutenFree === true),
+      previousState: state,
     };
   }
 
   if (action.type === ORGANIC) {
-    console.log("1 - Show All");
+    console.log("1 - Organic");
+
     return {
-      ...showAllState,
+      ...state,
       items: state.items.filter((item) => item.organic === true),
+      previousState: state,
     };
   }
 
@@ -190,6 +202,64 @@ const cartReducer = (state = showAllState, action) => {
     console.log("1 - Show All");
     return {
       ...showAllState,
+      previousState: state,
+    };
+  }
+
+  if (action.type === SHOW_CURRENT) {
+    console.log(state.previousState);
+    console.log("1 - Show Current");
+    return {
+      ...state.previousState,
+      previousState: state.previousState,
+    };
+  }
+
+  if (action.type === MEAT) {
+    console.log("1 - Show Meat");
+    console.log(state.previousState);
+    return {
+      ...state.previousState,
+      items: state.previousState.items.filter(
+        (item) => item.category === "meat"
+      ),
+      previousState: state.previousState,
+    };
+  }
+
+  if (action.type === DAIRY) {
+    console.log("1 - Show Dairy");
+    console.log(state.previousState);
+    return {
+      ...state.previousState,
+      items: state.previousState.items.filter(
+        (item) => item.category === "dairy"
+      ),
+      previousState: state.previousState,
+    };
+  }
+
+  if (action.type === GRAINS) {
+    console.log("1 - Show Grains");
+    console.log(state.previousState);
+    return {
+      ...state.previousState,
+      items: state.previousState.items.filter(
+        (item) => item.category === "grains"
+      ),
+      previousState: state.previousState,
+    };
+  }
+
+  if (action.type === FRUITVEGETABLES) {
+    console.log("1 - Show Fruit/Vegetables");
+    console.log(state.previousState);
+    return {
+      ...state.previousState,
+      items: state.previousState.items.filter(
+        (item) => item.category === "fruit/vegetable"
+      ),
+      previousState: state.previousState,
     };
   }
 
