@@ -212,7 +212,7 @@ const cartReducer = (state = showAllState, action) => {
     return {
       ...state.previousState,
       items: state.previousState.items,
-      previousState: state,
+      previousState: state.previousState,
     };
   }
 
