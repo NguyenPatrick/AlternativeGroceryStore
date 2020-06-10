@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Select from "react-select";
-import Collapsible from "react-collapsible";
-
-import Checkbox from "muicss/lib/react/checkbox";
+import { Redirect } from "react-router-dom";
 
 import "./Home.css";
 
@@ -14,27 +11,6 @@ import {
   showAllFilter,
   organicFilter,
 } from "./actions/cartActions";
-
-const data = [
-  {
-    value: "Show All",
-    label: "Show All",
-  },
-  {
-    value: "Vegetarian",
-    label: "Vegetarian",
-  },
-  {
-    value: "Gluten-Free",
-    label: "Gluten-Free",
-  },
-  {
-    value: "Organic",
-    label: "Organic",
-  },
-];
-
-const options = ["Vegetarian", "Gluten-Free", "Organic"];
 
 class Home extends Component {
   handleClick = (id) => {
@@ -55,128 +31,22 @@ class Home extends Component {
     }
   };
 
-  handleOrganic = (e) => {
-    console.log("Organic Filter");
-  };
-  handleOrganic = (e) => {
-    console.log("Organic Filter");
-  };
-  handleOrganic = (e) => {
-    console.log("Organic Filter");
+  nextPage = () => {
+    console.log("Next Page");
+    this.props.history.push("/main/");
   };
 
-  checkList = (e) => {
-    console.log("yooo");
-    console.log(e.value);
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
+  };
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
+  };
+  handleOrganic = (e) => {
+    console.log("Organic Filter");
   };
 
   render() {
-    let items = this.props.item;
-
-    let dairyList = this.props.items.map((item) => {
-      return item.category == "dairy" ? (
-        <div className="card" key={item.id}>
-          <div className="card-image">
-            <img src={item.img} alt={item.title} />
-          </div>
-          <span className="card-title">{item.title}</span>
-          <span
-            to="/"
-            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-            onClick={() => {
-              this.handleClick(item.id);
-            }}
-          >
-            <i className="material-icons">add</i>
-          </span>
-          <div className="card-content">
-            <p>{item.desc}</p>
-            <p className="card-price">
-              <b>Price: {item.price}$</b>
-            </p>
-          </div>
-        </div>
-      ) : null;
-    });
-
-    let grainsList = this.props.items.map((item) => {
-      return item.category == "grains" ? (
-        <div className="card" key={item.id}>
-          <div className="card-image">
-            <img src={item.img} alt={item.title} />
-          </div>
-          <span className="card-title">{item.title}</span>
-          <span
-            to="/"
-            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-            onClick={() => {
-              this.handleClick(item.id);
-            }}
-          >
-            <i className="material-icons">add</i>
-          </span>
-          <div className="card-content">
-            <p>{item.desc}</p>
-            <p className="card-price">
-              <b>Price: {item.price}$</b>
-            </p>
-          </div>
-        </div>
-      ) : null;
-    });
-
-    let fruitVegatableList = this.props.items.map((item) => {
-      return item.category == "vegetable" || item.category == "fruit" ? (
-        <div className="card" key={item.id}>
-          <div className="card-image">
-            <img src={item.img} alt={item.title} />
-          </div>
-          <span className="card-title">{item.title}</span>
-          <span
-            to="/"
-            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-            onClick={() => {
-              this.handleClick(item.id);
-            }}
-          >
-            <i className="material-icons">add</i>
-          </span>
-          <div className="card-content">
-            <p>{item.desc}</p>
-            <p className="card-price">
-              <b>Price: {item.price}$</b>
-            </p>
-          </div>
-        </div>
-      ) : null;
-    });
-
-    let meatList = this.props.items.map((item) => {
-      return item.category == "meat" ? (
-        <div className="card" key={item.id}>
-          <div className="card-image">
-            <img src={item.img} alt={item.title} />
-          </div>
-          <span className="card-title">{item.title}</span>
-          <span
-            to="/"
-            className="btn halfway-fab waves-effect waves-light lightblue card-button add-button"
-            onClick={() => {
-              this.handleClick(item.id);
-            }}
-          >
-            <i className="material-icons">add</i>
-          </span>
-          <div className="card-content">
-            <p>{item.desc}</p>
-            <p className="card-price">
-              <b>Price: {item.price}$</b>
-            </p>
-          </div>
-        </div>
-      ) : null;
-    });
-
     return (
       <div className="container landing">
         <h2 className="landing-title">Welcome to Patrick's Grocery Store!</h2>
@@ -196,7 +66,7 @@ class Home extends Component {
             <span>Gluten-Free</span>
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" onChange={this.handleChange} />
+            <input type="checkbox" onChange={this.handleOrganic} />
             <span>Organic</span>
           </label>
         </div>
@@ -204,43 +74,10 @@ class Home extends Component {
         <button
           className=" btn-large next-button"
           name="action"
-          onChange={this.handleChange}
+          onClick={this.nextPage}
         >
           Next
         </button>
-
-        <Select
-          placeholder="Select Option"
-          options={data} // set list of the data
-          onChange={this.handleChange} // assign onChange function
-        />
-
-        {/* 
-        <form>
-          <Checkbox
-            className="check"
-            name="inputA1"
-            label="Option one"
-            defaultChecked={true}
-            onChange={this.handleChange}
-          />
-          <Checkbox name="inputA2" label="Option two" />
-          <Checkbox
-            name="inputA3"
-            label="Option three is disabled"
-            disabled={true}
-          />
-        </form> */}
-
-        <h2 className="landing-title"></h2>
-        <div className="box">{dairyList}</div>
-
-        <h2 className="landing-title">Grains</h2>
-        <div className="box">{grainsList}</div>
-        <h2 className="landing-title">Fruits/Vegetables</h2>
-        <div className="box">{fruitVegatableList}</div>
-        <h2 className="landing-title">Meat</h2>
-        <div className="box">{meatList}</div>
       </div>
     );
   }
