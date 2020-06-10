@@ -202,7 +202,7 @@ const cartReducer = (state = showAllState, action) => {
     console.log("1 - Show All");
     return {
       ...showAllState,
-      previousState: state,
+      previousState: showAllState,
     };
   }
 
@@ -211,7 +211,8 @@ const cartReducer = (state = showAllState, action) => {
     console.log("1 - Show Current");
     return {
       ...state.previousState,
-      previousState: state.previousState,
+      items: state.previousState.items,
+      previousState: state,
     };
   }
 

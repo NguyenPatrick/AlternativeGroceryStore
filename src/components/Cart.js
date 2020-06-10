@@ -6,7 +6,7 @@ import {
   addQuantity,
   subtractQuantity,
 } from "./actions/cartActions";
-import Recipe from "./Recipe";
+import "./Home.css";
 class Cart extends Component {
   //to remove the item completely
   handleRemove = (id) => {
@@ -19,6 +19,10 @@ class Cart extends Component {
   //to substruct from the quantity
   handleSubtractQuantity = (id) => {
     this.props.subtractQuantity(id);
+  };
+
+  previousPage = () => {
+    this.props.history.push("/main/");
   };
 
   render() {
@@ -87,8 +91,18 @@ class Cart extends Component {
             </li>
           </div>
         </div>
-        <div className="checkout">
-          <button className="waves-effect waves-light btn">Checkout</button>
+        <div className="button-row">
+          <button
+            className=" btn-large next-button"
+            name="action"
+            onClick={this.previousPage}
+          >
+            Previous
+          </button>
+
+          <button className=" btn-large next-button" name="action">
+            Checkout
+          </button>
         </div>
       </div>
     );
